@@ -16,6 +16,10 @@ def read_file(filename: str) -> list[Equation]:
     
 def generate_permutations(numbers: list[int]) -> list[str]:
     """ Generate every permutation of the operators and numbers (as a string so i can eval later) """
+    # TODO: I've been thinking and I reckong there is a huge optimisation here 
+    # TODO: since each operator increases the value of the result (there is no - or /, so it doesn't decrease)
+    # TODO: instead of generating each permutation then testing it, we could instead generate each section
+    # TODO: if the current result after adding the operator is above the total, it cannot possibly be a valid route, so we should backtrack
     possible_operators = ['*', '+', '||']
     combinations = product(possible_operators, repeat=len(numbers) - 1)
     return [str(numbers[0]) + ''.join(
